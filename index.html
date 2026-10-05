@@ -505,7 +505,7 @@ const CFG = {
   gcd: 1,                   // cat abilities use a 1 sec global cooldown
   // Cat Form: 1.0 sec swings with level-based paw damage
   pawMin: 44, pawMax: 66, pawSpeed: 1,
-  maxEnergy: 100, energyTick: 20, energyEvery: 2, refundOnAvoid: 0.8,
+  maxEnergy: 100, energyPerSec: 10, refundOnAvoid: 0.8,   // Forever: Energy regenerates continuously, not in 2 sec ticks
   // Abilities (Forever tooltip values; formulas from the MythicSim engine)
   shredCost: 60, shredMult: 1.55, shredFlat: 180 / 1.55,
   ravageCost: 60, ravageMult: 3.5, ravageFlat: 98,
@@ -635,7 +635,7 @@ const newState = () => ({
   swing: 0, cast: null, prowl: true,
   buffs: { berserk: 0, elune: 0 }, clearcast: false, omenReady: 0,
   rip: { ticks: 0, next: 0, dmg: 0 },
-  chiliReady: 0, manaTimer: 0, energyTimer: 0, lastManaSpend: -100,
+  chiliReady: 0, manaTimer: 0, lastManaSpend: -100,
   totalDamage: 0, hp: CFG.targetHp, started: false, over: false,
   stats: {}, manaSpent: 0, manaGained: 0, energySpent: 0,
 });
@@ -866,8 +866,7 @@ function deny(a) {
 function tick(dt) {
   S.t += dt;
 
-  S.energyTimer += dt;
-  while (S.energyTimer >= CFG.energyEvery) { S.energyTimer -= CFG.energyEvery; addEnergy(CFG.energyTick); }
+  addEnergy(CFG.energyPerSec * dt);   // continuous regeneration
 
   // Mana every 2 sec: Blessing of Wisdom and Mana Spring always; Spirit only 5 sec after the last mana spent
   S.manaTimer += dt;

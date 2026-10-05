@@ -7,7 +7,7 @@ A browser sim for practising the level 60 Feral (cat) Druid rotation in World of
 ## Features
 
 - Ravage opener from Prowl, Shred, Rip, Ferocious Bite, Shifting Power, Berserk, Elune's Light, Major Mana Potion and Demonic Rune
-- Energy ticks, Combo Points with Blood Frenzy, Omen of Clarity Clearcasting, Rend and Tear, and Windfury Totem procs
+- Continuous Energy regeneration, Combo Points with Blood Frenzy, Omen of Clarity Clearcasting, Rend and Tear, and Windfury Totem procs
 - Shifting Power turns mana into Energy, with Spirit regeneration following the five-second rule
 - Toggles for raid buffs, consumables and boss debuffs
 - Gear and talent tabs, plus a Stats tab for entering your own character stats
